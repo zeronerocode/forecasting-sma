@@ -49,7 +49,6 @@
                             @endforelse
                         </tbody>
                     </table>
-                    {{$penjualans[1]->name}}
                 </div>
             </div>
         </div>

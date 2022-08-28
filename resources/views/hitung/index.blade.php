@@ -5,25 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">{{ __('Forecasting') }}</div>
-
-                <div class="card-body">
-                    <form action="">
-                        <div class="form-group">
-                            <label for="">Alpha</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group py-2">
-                            <label for="">Next Periode</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <button type="submit" class="btn btn-success">Hitung</button>
-                    </form>
-                </div>
-            </div>
-            <br>
-            <div class="card">
-                <div class="card-header">{{ __('Piring') }}</div>
+                <div class="card-header">{{ __('Peramalan') }}</div>
 
                 <div class="card-body">
                 <table class="table align-middle">
@@ -35,7 +17,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{$total = 0}}
+                            <span class="d-none">{{$total = 0}}</span>
                             @forelse($penjualans as $penjualan)
                             <tr>
                                 <th scope="row">
