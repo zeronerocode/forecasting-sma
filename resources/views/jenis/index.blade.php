@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <div class="justify-content-end">
-                        <button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Tambah</button>
+                        <a href="{{ route('jenis.create') }}" type="button" class="btn btn-success"><i class="fas fa-plus"></i> Tambah</a>
                     </div>
                     <table class="table align-middle">
                         <thead class="thead-dark">
@@ -20,9 +20,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse ($produks as $produk)
                             <tr>
-                                <th scope="row">GC01</th>
-                                <th>Guci</th>
+                                <th scope="row">{{$produk->kode_produk}}</th>
+                                <th>{{$produk->nama_produk}}</th>
                                 <th>
                                     <button class="btn btn-light">
                                         <i class="fas fa-external-link-alt text-success"></i>
@@ -32,30 +33,11 @@
                                     </button>
                                 </th>
                             </tr>
-                            <tr>
-                                <th scope="row">PR01</th>
-                                <th>Piring</th>
-                                <th>
-                                    <button class="btn btn-light">
-                                        <i class="fas fa-external-link-alt text-success"></i>
-                                    </button>
-                                    <button class="btn btn-light">
-                                        <i class="fas fa-trash-alt text-danger"></i>
-                                    </button>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th scope="row">VS01</th>
-                                <th>Vas Bunga</th>
-                                <th>
-                                    <button class="btn btn-light">
-                                        <i class="fas fa-external-link-alt text-success"></i>
-                                    </button>
-                                    <button class="btn btn-light">
-                                        <i class="fas fa-trash-alt text-danger"></i>
-                                    </button>
-                                </th>
-                            </tr>
+                            @empty
+                            <div class="alert alert-danger">
+                            Data Produk belum Tersedia.
+                            </div>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

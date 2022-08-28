@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Produk;
 
 class JenisController extends Controller
 {
@@ -13,7 +14,8 @@ class JenisController extends Controller
      */
     public function index()
     {
-        return view("jenis.index");
+        $produks = Produk::oldest()->paginate(20);
+        return view('jenis.index', compact('produks'));
     }
 
     /**
@@ -34,7 +36,17 @@ class JenisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request -> validate ( [
+            "kode_produk" => ['required', 'string'],
+            "nama_produk" => ['required', 'string']
+        ]);
+
+        $produk = Produk::create([
+            "kode_produk" => $request -> kode_produk,
+            "nama_produk" => $request -> nama_produk
+        ]);
+
+        return redirect()->route('jenis.index')->with(['success' => 'Member Berhasil Disimpan!']);
     }
 
     /**

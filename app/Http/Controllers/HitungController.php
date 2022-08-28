@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Penjualan;
 
 class HitungController extends Controller
 {
@@ -13,7 +14,8 @@ class HitungController extends Controller
      */
     public function index()
     {
-        return view('hitung.index');
+        $penjualans = Penjualan::oldest()->paginate(10);
+        return view("hitung.index", compact("penjualans"));
     }
 
     /**

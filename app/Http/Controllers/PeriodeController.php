@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Penjualan;
 
 class PeriodeController extends Controller
 {
@@ -13,7 +14,8 @@ class PeriodeController extends Controller
      */
     public function index()
     {
-        return view("periode.index");
+        $penjualans = Penjualan::oldest()->paginate(10);
+        return view("periode.index", compact("penjualans"));
     }
 
     /**
@@ -34,7 +36,21 @@ class PeriodeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request -> validate([
+            "bulan" => ['required'],
+            "tahun" => ['required'],
+            "kode_produk" => ['required'],
+            "jumlah" => ['required']
+        ]);
+
+        $penjualan = Penjualan::create([
+            "bulan" => $request->bulan,
+            "tahun" => $request->tahun,
+            "kode_produk" => $request->kode_produk,
+            "jumlah" => $request->jumlah
+        ]);
+
+        return redirect()->route('periode.index')->with(['success' => 'Member Berhasil Disimpan!']);
     }
 
     /**

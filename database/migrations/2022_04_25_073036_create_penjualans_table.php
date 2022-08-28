@@ -20,6 +20,7 @@ class CreatePenjualansTable extends Migration
             $table->integer('bulan');
             $table->integer('tahun');
             $table->integer('jumlah');
+            $table->timestamps();
         });
     }
 

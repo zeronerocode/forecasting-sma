@@ -35,26 +35,24 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{$total = 0}}
+                            @forelse($penjualans as $penjualan)
                             <tr>
-                                <th scope="row">January</th>
-                                <th>70</th>
-                                <th>0</th>
+                                <th scope="row">
+                                        @if($penjualan->bulan === 1)
+                                        January
+                                        @elseif($penjualan->bulan === 2)
+                                        February
+                                        @endif
+                                    </th>
+                                <th>{{$penjualan->jumlah}}</th>
+                                <th>{{$total += ($penjualan->jumlah/ $penjualan->bulan)}}</th>
                             </tr>
-                            <tr>
-                                <th scope="row">February</th>
-                                <th>50</th>
-                                <th>70</th>
-                            </tr>
-                            <tr>
-                                <th scope="row">Maret</th>
-                                <th>80</th>
-                                <th>68</th>
-                            </tr>
-                            <tr>
-                                <th scope="row">April</th>
-                                <th>70</th>
-                                <th>69.2</th>
-                            </tr>
+                            @empty
+                            <div class="alert alert-danger">
+                                Data Penjualan belum Tersedia.
+                                </div>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
