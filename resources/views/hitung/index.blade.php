@@ -43,6 +43,26 @@
                                         January
                                         @elseif($penjualan->bulan === 2)
                                         February
+                                        @elseif($penjualan->bulan === 3)
+                                        Maret
+                                        @elseif($penjualan->bulan === 4)
+                                        April
+                                        @elseif($penjualan->bulan === 5)
+                                        Mei
+                                        @elseif($penjualan->bulan === 6)
+                                        Juni
+                                        @elseif($penjualan->bulan === 7)
+                                        Juli
+                                        @elseif($penjualan->bulan === 8)
+                                        Agustus
+                                        @elseif($penjualan->bulan === 9)
+                                        September
+                                        @elseif($penjualan->bulan === 10)
+                                        Oktober
+                                        @elseif($penjualan->bulan === 11)
+                                        November
+                                        @else
+                                        Desember
                                         @endif
                                     </th>
                                 <th>{{$penjualan->jumlah}}</th>
