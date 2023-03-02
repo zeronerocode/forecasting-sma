@@ -14,8 +14,39 @@ class HitungController extends Controller
      */
     public function index()
     {
-        $penjualans = Penjualan::oldest()->paginate(10);
-        return view("hitung.index", compact("penjualans"));
+        $bulans = Penjualan::pluck('bulan')->toArray();;
+        $dataPoints = Penjualan::pluck('jumlah')->toArray();
+        $alpha = 0.5 ;
+        $smoothedDataPoints = [];
+        $movingAverageDataPoints = [];
+        $windowSize = 3;
+
+        $smoothedDataPoints[0] = $dataPoints[0]; 
+        for ($i = 1; $i < count($dataPoints); $i++) {
+            $smoothedDataPoints[$i] = $alpha * $dataPoints[$i] + (1 - $alpha) * $smoothedDataPoints[$i-1]; // Apply the exponential smoothing formula
+        }
+
+        $movingAverageDataPoints = [];
+        for ($i = 0; $i < count($dataPoints); $i++) {
+            if ($i < $windowSize-1) {
+                // Not enough data to calculate a moving average yet
+                $movingAverageDataPoints[] = null;
+            } else {
+                // Calculate the moving average
+                $sum = 0;
+                for ($j = 0; $j < $windowSize; $j++) {
+                    $sum += $dataPoints[$i-$j];
+                }
+                $movingAverageDataPoints[] = $sum / $windowSize;
+            }
+        }
+        
+        return view("hitung.index", [
+            'dataPoints' => $dataPoints,
+            'smoothedDataPoints' => $smoothedDataPoints,
+            'movingAverageDataPoints' => $movingAverageDataPoints,
+            'bulans' => $bulans
+        ]);
     }
 
     /**
