@@ -25,12 +25,14 @@
                                 <th scope="row">{{$produk->kode_produk}}</th>
                                 <th>{{$produk->nama_produk}}</th>
                                 <th>
-                                    <button class="btn btn-light">
-                                        <i class="fas fa-external-link-alt text-success"></i>
-                                    </button>
-                                    <button class="btn btn-light">
-                                        <i class="fas fa-trash-alt text-danger"></i>
-                                    </button>
+                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                        action="{{ route('jenis.destroy', $produk->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-light">
+                                            <i class="fas fa-trash-alt text-danger"></i>
+                                        </button>
+                                    </form>
                                 </th>
                             </tr>
                             @empty

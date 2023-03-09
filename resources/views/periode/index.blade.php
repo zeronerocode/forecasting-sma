@@ -34,12 +34,14 @@
                                 <td>{{ $penjualan->kode_produk }}</td>
                                 <td>{{ $penjualan->jumlah }}</td>
                                 <td>
-                                    <button class="btn btn-light">
-                                        <i class="fas fa-external-link-alt text-success"></i>
-                                    </button>
-                                    <button class="btn btn-light">
-                                        <i class="fas fa-trash-alt text-danger"></i>
-                                    </button>
+                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                        action="{{ route('periode.destroy', $penjualan->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-light">
+                                            <i class="fas fa-trash-alt text-danger"></i>
+                                        </button>
+                                    </form>
                                 </th>
                             </tr>
                             @empty

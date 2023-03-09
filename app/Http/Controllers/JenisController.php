@@ -91,6 +91,21 @@ class JenisController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $produk = Produk::findOrFail($id);
+        $produk->delete();
+
+        if ($produk) {
+            return redirect()
+                ->route('jenis.index')
+                ->with([
+                    'success' => 'Produk has been deleted successfully'
+                ]);
+        } else {
+            return redirect()
+                ->route('jenis.index')
+                ->with([
+                    'error' => 'Produk problem has occurred, please try again'
+                ]);
+        }
     }
 }

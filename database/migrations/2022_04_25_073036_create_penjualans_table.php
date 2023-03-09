@@ -16,7 +16,7 @@ class CreatePenjualansTable extends Migration
         Schema::create('penjualans', function (Blueprint $table) {
             $table->id();
             $table->string('kode_produk');
-            $table->foreign('kode_produk')->references('kode_produk')->on('produks');
+            $table->string('kode_produk');
             $table->integer('bulan');
             $table->integer('tahun');
             $table->integer('jumlah');

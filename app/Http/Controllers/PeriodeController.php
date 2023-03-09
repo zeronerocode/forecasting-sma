@@ -95,6 +95,21 @@ class PeriodeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $produk = Penjualan::findOrFail($id);
+        $produk->delete();
+
+        if ($produk) {
+            return redirect()
+                ->route('periode.index')
+                ->with([
+                    'success' => 'Produk has been deleted successfully'
+                ]);
+        } else {
+            return redirect()
+                ->route('periode.index')
+                ->with([
+                    'error' => 'Produk problem has occurred, please try again'
+                ]);
+        }
     }
 }
